@@ -1,0 +1,16 @@
+---
+- hosts: dev
+  become: true
+  tasks:
+    - name: install tomact server
+      get_url:
+        url: https://downloads.apache.org/tomcat/tomcat-8/v8.5.69/bin/apache-tomcat-8.5.69.tar.gz
+        dest: /usr/local
+
+    - name: extract tomact package
+      unarchive:
+        src: /usr/local/apache-tomcat-8.5.69.tar.gz
+        dest: /usr/local
+        remote_src: yes
+    - name: start tomact server
+      shell: nohup /usr/local/apache-tomcat-8.5.69/bin/startup.sh
